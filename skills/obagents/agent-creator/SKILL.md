@@ -30,14 +30,16 @@ When a field stalls, propose a default drawn from the **archetype** that matches
 Match the interview to a built-in **archetype**: `engineer`, `designer`, `copywriter`, or `orchestrator`. When the persona fits one, generate directly:
 
 ```bash
-obagents create <name> --template <archetype>
+obagents create <name> --template <archetype> --description "<one-line description>"
 ```
 
 When the persona fits no archetype, author a custom template directory with three files — `SOUL.md` (sections: Role, Responsibilities, Boundaries including non-goals, Style, Goals), framed `MEMORY.md`, framed `USER.md`. Use the `{{AGENT_NAME}}` and `{{AGENT_DESCRIPTION}}` placeholders so the tool substitutes the interviewed answers, and reuse the operating-principles bullets from the default SOUL where role-appropriate. Skeleton files contain no Core Directives block — the tool appends it. Then:
 
 ```bash
-obagents create <name> --template /path/to/template-dir
+obagents create <name> --template /path/to/template-dir --description "<one-line description>"
 ```
+
+Pass the interviewed one-liner as `--description` — the CLI only asks for it interactively when no name is given, and the persona placeholder depends on it.
 
 **Completion criterion:** `obagents create` reports success and every placeholder was substituted in the written triad.
 
