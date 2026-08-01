@@ -1,2 +1,9 @@
 node_modules/
 .DS_Store
+
+# Local Agent Configuration
+.agents/
+.claude/
+.obagents-project.json
+AGENTS.md
+skills-lock.json

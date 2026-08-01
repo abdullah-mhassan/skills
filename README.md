@@ -1,7 +1,54 @@
-# abdullah-mhassan/skills
+# Skills (`abdullah-mhassan/skills`)
 
-Skills for OB Agents and beyond, organized by category:
+**Modular, reusable skills for AI coding assistants and autonomous agents.**
 
-- `skills/obagents/` — skills that operate the [OB Agents](https://github.com/abdullah-mhassan/obagents) CLI and its Active Layer MCP server.
+Skills are folders of instructions, scripts, and resources that AI agents load dynamically to improve performance on specialized engineering and agentic tasks.
 
-Each skill lives at `skills/<category>/<skill-name>/SKILL.md` and is installable via a `skills-lock.json` entry pointing at its `skillPath`.
+---
+
+## Installation
+
+```bash
+npx skills add abdullah-mhassan/skills
+```
+
+---
+
+## Skills Catalog
+
+| Skill | Category | Description | Location |
+| :--- | :--- | :--- | :--- |
+| `agent-creator` | `obagents` | Design, structure, and author new OB Agents with rich personas, roles, boundaries, and goals. | [`skills/obagents/agent-creator`](skills/obagents/agent-creator/SKILL.md) |
+
+---
+
+## Usage
+
+Invoke installed skills directly in your agent session:
+
+```text
+Use $agent-creator to build a specialized QA engineer agent with strict boundary rules.
+```
+
+---
+
+## Updating Skills
+
+Update installed skills using the Skills CLI:
+
+```bash
+npx skills update
+```
+
+---
+
+## Repository Structure
+
+```
+.
+└── skills/                       # Skills organized by category (<category>/<skill-name>/)
+    └── obagents/                 # OB Agents skill category
+        └── agent-creator/        # Agent creator skill definition
+            ├── SKILL.md          # Primary skill prompt & frontmatter
+            └── feature-map.md    # Capability mapping reference
+```
