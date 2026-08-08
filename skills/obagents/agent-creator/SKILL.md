@@ -47,7 +47,7 @@ Pass the interviewed one-liner as `--description` — the CLI only asks for it i
 
 1. **Verify the triad** — `SOUL.md`, `MEMORY.md`, `USER.md` exist in the agent's Vault, and `SOUL.md` ends with the Core Directives block.
 2. **Link** — `obagents link <name>` (pick the target tool; `-t <target>` skips the prompt).
-3. **Activate** — `obagents activate <name>`, or `obagents serve <name>` to run the agent's Active Layer MCP server.
+3. **Activate** — `obagents activate <name>` (set the active runtime agent for the current project), then `obagents serve` (in the project dir) to run the project's Active Layer MCP gateway. Since 0.3.1 the gateway is one shared server per project — there is no per-agent `serve <name>` server anymore; the served agent resolves dynamically per call.
 
 **Completion criterion:** the verified triad is shown to the user and the agent is linked and active.
 

@@ -1,6 +1,6 @@
 # OB Agents Active Layer — Feature Map
 
-The Active Layer is the live, project-scoped MCP server (`obagents serve <agent>`) that exposes the OB Agents Vault to AI coding tools. This map covers every tool it registers, with exact schemas and semantics.
+The Active Layer is the live, project-scoped MCP gateway (`obagents serve` — one shared server per project, no agent argument; the served agent/project are resolved dynamically per call) that exposes the OB Agents Vault to AI coding tools. This map covers every tool it registers, with exact schemas and semantics.
 
 > **Schemas evolve.** This map was cross-checked against `src/mcp/tools/*.ts` at authoring time. If a tool behaves differently than described, the live MCP server is the source of truth — verify before relying on a detail.
 
@@ -28,7 +28,7 @@ Assign an existing agent to a specific project workspace. Injects the agent's co
 | Param | Type | Notes |
 |---|---|---|
 | `name` | string | Existing agent |
-| `targets` | string[] | One or more of: `cursor`, `windsurf`, `roo`, `continue`, `copilot`, `claude-code`, `aider`, `opencode`, `codex`, `kilo`, `grok`, `qwen`, `pi`, `swe-agent`, `antigravity`, `generic` |
+| `targets` | string[] | One or more of the verified core targets: `claude-code`, `cursor`, `codex`, `opencode`, `antigravity`, `copilot`, `generic` (the 10 legacy targets — windsurf, roo, continue, aider, kilo, grok, qwen, pi, swe-agent, command-code — are unlink-only cleanup since 0.4.0) |
 | `projectPath` | string? | Defaults to the current working directory |
 
 Returns `{ success, outcome }`. Link/unlink mutations apply target adapters first with rollback on error; only success commits graph metadata.
@@ -52,7 +52,7 @@ Retrieve another agent's full compiled state (SOUL, MEMORY, USER). Cheap, determ
 |---|---|---|
 | `targetAgent` | string | Existing agent; errors if it does not exist |
 
-Returns `{ memory, note }` where `note` states the lookup was memory-only. Prefer this over `consult_agent` when you need the full rules + memory, not an answer.
+Returns `{ memory, note }` where `note` (MEMORY_ONLY_NOTE) states the lookup was a deterministic read of the agent's recorded episode log — no project files read, no web search. Prefer this over `consult_agent` when you need the full rules + memory, not an answer.
 
 ### `consult_agent`
 
@@ -115,4 +115,4 @@ Returns `{ success, path }` — or `{ success, unchanged: true, path }` when the
 - **Project scoping** — memory entries and searches are scoped to the served project unless `project`/`global` is given.
 - **Consolidation trigger** — at 20 rows since the last consolidation (`threshold`), `needsConsolidation` becomes true and a `consolidate_agent` call is due.
 - **Duplicates** — `update_state` dedupes by exact content; `learn_skill` by exact file content.
-- **MEMORY_ONLY_NOTE** — memory lookups are deterministic, memory-only operations: no files were read and no web search was performed.
+- **MEMORY_ONLY_NOTE** — deterministic lookups return a note clarifying their source: the agent's recorded episode log (decisions, tool-call records, skills, consolidation summaries), scoped to the agent's vault — no project files were read and no web search was performed. It describes episode sources, not a separate "memory-only" store. Prefer `consult_agent` over generic `search_history` when you need another agent's memory.
