@@ -18,7 +18,7 @@ npx skills add abdullah-mhassan/skills
 
 | Skill | Category | Description | Location |
 | :--- | :--- | :--- | :--- |
-| `agent-creator` | `obagents` | Design, structure, and author new OB Agents with rich personas, roles, boundaries, and goals. | [`skills/obagents/agent-creator`](skills/obagents/agent-creator/SKILL.md) |
+| `agent-creator` | `obagents` | Design, structure, and author new OB Agents with rich personas, roles, boundaries, and goals — plus a full feature map of the OB Agents Active Layer (MCP tools, gateway trust boundary, target wiring) synced with obagents 0.5.0. | [`skills/obagents/agent-creator`](skills/obagents/agent-creator/SKILL.md) |
 
 ---
 
