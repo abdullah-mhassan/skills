@@ -19,6 +19,7 @@ npx skills add abdullah-mhassan/skills
 | Skill | Category | Description | Location |
 | :--- | :--- | :--- | :--- |
 | `agent-creator` | `obagents` | Design, structure, and author new OB Agents with rich personas, roles, boundaries, and goals — plus a full feature map of the OB Agents Active Layer (MCP tools, gateway trust boundary, target wiring) synced with obagents 0.5.0. | [`skills/obagents/agent-creator`](skills/obagents/agent-creator/SKILL.md) |
+| `implement-advanced` | `engineering` | Work a phase tracker to done, one ticket per wave: dispatch each open unblocked ticket to a subagent, verify, review, and commit. The main session is the boss; workers never commit. | [`skills/engineering/implement-advanced`](skills/engineering/implement-advanced/SKILL.md) |
 
 ---
 
@@ -47,8 +48,13 @@ npx skills update
 ```
 .
 └── skills/                       # Skills organized by category (<category>/<skill-name>/)
-    └── obagents/                 # OB Agents skill category
-        └── agent-creator/        # Agent creator skill definition
+    ├── obagents/                 # OB Agents skill category
+    │   └── agent-creator/        # Agent creator skill definition
+    │       ├── SKILL.md          # Primary skill prompt & frontmatter
+    │       └── feature-map.md    # Capability mapping reference
+    └── engineering/              # Engineering workflow skill category
+        └── implement-advanced/   # One-ticket-per-wave phase orchestrator
             ├── SKILL.md          # Primary skill prompt & frontmatter
-            └── feature-map.md    # Capability mapping reference
+            └── references/
+                └── worker-brief.md  # Subagent brief template (one ticket)
 ```
